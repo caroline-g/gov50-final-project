@@ -23,7 +23,12 @@ I am interested in exploring data related to the East Asian economy and internat
 
 
 ```{r}
+library(devtools)
+library(tidyverse)
+devtools::install_github("vdeminstitute/ERT")
+```
 
-
+```{r}
+ert <- read_csv("data/ert.csv")
 ```
 
