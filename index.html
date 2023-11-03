@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/ert.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1543,16 +1543,69 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
+<h2 id="milestone-3-1st-visualization">Milestone 3: 1st Visualization</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://devtools.r-lib.org/'>devtools</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='fu'>devtools</span><span class='fu'>::</span><span class='fu'><a href='https://remotes.r-lib.org/reference/install_github.html'>install_github</a></span><span class='op'>(</span><span class='st'>"vdeminstitute/ERT"</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># load data, subset to democracies observed in 2022, and sort data alphabetically by country name</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>ERT</span><span class='op'>)</span></span>
+<span><span class='va'>ERT</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ERT/man/get_eps.html'>get_eps</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>reg_type</span> <span class='op'>==</span> <span class='fl'>1</span> <span class='op'>&amp;</span> <span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2022</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>country_name</span><span class='op'>)</span></span>
+<span><span class='va'>ERT</span></span></code></pre>
+</div>
+<pre><code># A tibble: 90 × 41
+   country_id country_text_id country_name            year v2x_regime
+        &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;                  &lt;dbl&gt;      &lt;dbl&gt;
+ 1         37 ARG             Argentina               2022          2
+ 2        105 ARM             Armenia                 2022          2
+ 3         67 AUS             Australia               2022          3
+ 4        144 AUT             Austria                 2022          2
+ 5        147 BRB             Barbados                2022          3
+ 6        148 BEL             Belgium                 2022          3
+ 7         53 BTN             Bhutan                  2022          2
+ 8        150 BIH             Bosnia and Herzegovina  2022          2
+ 9         68 BWA             Botswana                2022          2
+10         19 BRA             Brazil                  2022          2
+# ℹ 80 more rows
+# ℹ 36 more variables: v2x_polyarchy &lt;dbl&gt;,
+#   v2x_polyarchy_codelow &lt;dbl&gt;, v2x_polyarchy_codehigh &lt;dbl&gt;,
+#   reg_start_year &lt;dbl&gt;, reg_end_year &lt;dbl&gt;, reg_id &lt;chr&gt;,
+#   reg_type &lt;dbl&gt;, reg_trans &lt;dbl&gt;, dem_founding_elec &lt;dbl&gt;,
+#   aut_founding_elec &lt;dbl&gt;, row_regch_event &lt;dbl&gt;,
+#   row_regch_censored &lt;dbl&gt;, dem_ep &lt;dbl&gt;, dem_ep_id &lt;chr&gt;, …</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>age_dem_scatter</span> <span class='op'>&lt;-</span> <span class='va'>ERT</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>regime_age <span class='op'>=</span> <span class='fl'>2022</span> <span class='op'>-</span> <span class='va'>reg_start_year</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span><span class='va'>country_name</span>, <span class='va'>reg_start_year</span>, <span class='va'>v2x_polyarchy</span>, <span class='va'>regime_age</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>regime_age</span>, y <span class='op'>=</span> <span class='va'>v2x_polyarchy</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Regime age (years)"</span>, </span>
+<span>       y <span class='op'>=</span> <span class='st'>"V-Dem electoral democracy index score"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"Electoral Democracy Index Score by Regime Age"</span>,</span>
+<span>       subtitle <span class='op'>=</span> <span class='st'>"Among Democratic Countries as of 2022"</span>,</span>
+<span>       caption <span class='op'>=</span> <span class='st'>"V-Dem Institute, 2022"</span><span class='op'>)</span></span>
+<span><span class='va'>age_dem_scatter</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
 <h2 id="milestone-2-project-proposal">Milestone 2: Project Proposal</h2>
 <p>Does a democratic regime’s age strengthen the regime’s electoral democracy? Through this project, I plan to investigate if and how the age of a country’s current democratic government contributes to the country’s level of electoral democracy. I hypothesize that older democratic regimes (i.e., those founded earlier) will have stronger principles of electoral democracy as measured by the V-Dem electoral democracy index. In other words, the longer a democracy has existed, the higher its electoral democracy index will tend to be. My reasoning behind this hypothesis is that older democracies will have had more time to establish and institutionalize the cultural, historical, and political legitimacy of democratic elections. The longer democratic elections have been taking place within a country, the more embedded they will be in the country’s national identity, value system, and/or political culture, which should theoretically strengthen the principle of electoral democracy within that country.</p>
 <p>To explore this hypothesis, I will analyze V-Dem’s Episodes of Regime Transformation (ERT) data set, which contains 680 unique ERTs from 1900 to 2019. My explanatory variable of interest is the age of the democratic regime. I will derive this regime age variable from the regime founding year variable (reg_start_year, which is coded as a year between 1900 and 2019) by subtracting the founding year from 2019. The explanatory variable of regime age will be measured as an integer between 0-119 that represents a number of years. My outcome variable of interest is the regime’s current score on the V-Dem electoral democracy index (represented by the variable v2x_polyarchy), which is measured as a value between the interval of 0 to 1. This score is determined by the methodology established by Michael Coppedge et al. via the V-Dem project. To keep my analysis focused on democracies, I will filter both the regime founding year variable and electoral democracy index (EDI) variable to only include democracies by using the regime type variable (reg_type).</p>
 <p>A positive correlation between democratic regime age and EDI within the data would provide support for my hypothesis. Meanwhile, data showing a negative correlation or zero correlation between these variables would disprove my hypothesis.</p>
 <h2 id="milestone-1-project-thoughts-now-obsolete">Milestone 1: Project thoughts (now obsolete)</h2>
 <p>I am interested in exploring data related to the East Asian economy and international political economy. In particular, I’d like to investigate the diplomatic and economic impact of the K-pop industry (e.g., data related to revenue generated by the K-pop industry and related tourism, changes in international perceptions of Korea due to Hallyu, etc.).</p>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
