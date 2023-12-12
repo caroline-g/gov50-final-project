@@ -48,7 +48,7 @@ score_density <- ert |>
   ggplot(aes(x = v2x_polyarchy)) +
   geom_histogram(aes(y = after_stat(density)), 
                  binwidth = 0.05, color = "pink") +
-  xlim(0, 1) +
+  xlim(0,1) +
   labs(x = "V-Dem electoral democracy index score", 
        y = "Density",
        title = "Density Histogram of Electoral Democracy Index Score",
