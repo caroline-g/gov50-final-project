@@ -48,7 +48,7 @@ score_density <- ert |>
   ggplot(aes(x = v2x_polyarchy)) +
   geom_histogram(aes(y = after_stat(density)), 
                  binwidth = 0.05, color = "pink") +
-  xlim(0,1) +
+  xlim(0, 1) +
   labs(x = "V-Dem electoral democracy index score", 
        y = "Density",
        title = "Density Histogram of Electoral Democracy Index Score",
@@ -77,7 +77,7 @@ My outcome variable of interest is the regime’s current score on the V-Dem ele
 age_dem_scatter <- ert |> 
   ggplot(mapping = aes(x = regime_age, y =  v2x_polyarchy)) +
   geom_point(alpha = 0.8) +
-  ylim(0,1) +
+  ylim(0, 1) +
   geom_smooth(method = "lm") +
   labs(x = "Regime age (years)", 
        y = "V-Dem electoral democracy index score",
