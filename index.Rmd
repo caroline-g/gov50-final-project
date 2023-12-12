@@ -46,7 +46,9 @@ ert <- get_eps() |>
 
 score_density <- ert |>
   ggplot(aes(x = v2x_polyarchy)) +
-  geom_histogram(aes(y = after_stat(density)), binwidth = 0.05, color = "pink") +
+  geom_histogram(aes(y = after_stat(density)), 
+                 binwidth = 0.05, color = "pink") +
+  xlim(0, 1) +
   labs(x = "V-Dem electoral democracy index score", 
        y = "Density",
        title = "Density Histogram of Electoral Democracy Index Score",
@@ -60,7 +62,7 @@ For my project, I will primarily analyze V-Dem’s Episodes of Regime Transforma
 
 My explanatory variable of interest is the age of the democratic regime, measured as an integer in years. I will derive this regime age variable from the regime founding year variable (reg_start_year, which is coded as a year between 1900 and 2022) by subtracting the founding year from 2022. V-Dem determined the regime founding year based on their expert analysis of when a given country’s regime transitioned from autocracy to democracy according to V-Dem’s categorization of Regimes of the World. Additionally, I was curious about how GDP may be a confounding variable that increases with time and that may increase the democratic index score of a regime. Thus, I also included a data set from the World Bank on each country’s 2022 GDP in USD to briefly evaluate GDP as an additional potential explanatory variable. 
 
-My outcome variable of interest is the regime’s current score on the V-Dem electoral democracy index (represented by the variable v2x_polyarchy), which is measured as a value in the interval from 0 to 1. This score is determined by the expert coding methodology established by Michael Coppedge et al. via the V-Dem project. To keep my analysis focused on democracies, I will use the regime type variable (reg_type) to filter my data set to only include democracies existing in 2022. As the above density histogram depicts, there is a leftward skew in the distribution of EDIs among democracies in 2022, with the mode of scores being around 0.8.
+My outcome variable of interest is the regime’s current score on the V-Dem electoral democracy index (represented by the variable v2x_polyarchy), which is measured as a value in the interval from 0 to 1. This score is determined by the expert coding methodology established by Michael Coppedge et al. via the V-Dem project. To keep my analysis focused on democracies, I will use the regime type variable (reg_type) to filter my data set to only include democracies existing in 2022. As the above density histogram depicts, there is a leftward skew in the distribution of EDIs among democracies in 2022, with the mode of scores being a little over 0.8.
 
 
 
@@ -73,7 +75,6 @@ My outcome variable of interest is the regime’s current score on the V-Dem ele
 # electoral democracy index score by regime age
 
 age_dem_scatter <- ert |> 
-  summarize(country_name, reg_start_year, v2x_polyarchy, regime_age) |>
   ggplot(mapping = aes(x = regime_age, y =  v2x_polyarchy)) +
   geom_point(alpha = 0.8) +
   ylim(0,1) +
